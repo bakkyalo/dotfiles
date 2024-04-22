@@ -1,47 +1,50 @@
 " dein.vim
-" if &compatible
-"	set nocompatible
-" endif 
-" set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
+" https://github.com/Shougo/dein.vim/blob/master/README.md
+" let $CACHE = expand('~/.cache')
+" if !($CACHE->isdirectory())
+"   call mkdir($CACHE, 'p')
+" endif
+" if &runtimepath !~# '/dein.vim'
+"   let s:dir = 'dein.vim'->fnamemodify(':p')
+"   if !(s:dir->isdirectory())
+"     let s:dir = $CACHE .. '/dein/repos/github.com/Shougo/dein.vim'
+"     if !(s:dir->isdirectory())
+"       execute '!git clone https://github.com/Shougo/dein.vim' s:dir
+"     endif
+"   endif
+"   execute 'set runtimepath^='
+"         \ .. s:dir->fnamemodify(':p')->substitute('[/\\]$', '', '')
+" endif
 
-" call dein#begin(expand('~/.vim/dein'))
 
-" call dein#add('Shougo/dein.vim')
-" call dein#add('Shougo/vimproc.vim', { 'build': 'make'} )
+if &compatible
+set nocompatible
+endif 
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim
 
-" call dein#add('Shougo/neocomplete.vim')
-" call dein#add('Shougo/neomru.vim')
-" call dein#add('Shougo/neosnippet')
+call dein#begin(expand('~/.vim/dein'))
 
-" call dein#end()
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc.vim', { 'build': 'make'} )
 
+call dein#add('Shougo/neomru.vim')
+call dein#add('Shougo/neosnippet')
+call dein#end()
 
-
-" Vundle start --------------------------
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-
-Plugin 'VundleVim/Vundle.vim'
-
-" 導入したいプラグインを以下に列挙
-" Plugin '[Github Author]/[Github repo]' の形式で記入
-Plugin 'airblade/vim-gitgutter'
-
-call vundle#end()
+" call vundle#end()
 " Vundle end ----------------------------
 
 
 " Vim-Plug install start ----------------
-call plug#begin()
+" call plug#begin()
 " call plug#begin(~/.vim/plugged')
-Plug 'tpope/vim-sensible'
+" Plug 'tpope/vim-sensible'
 
 " https://github.com/xuhdev/vim-latex-live-preview
 " A Vim Plugin for Lively Previewing LaTeX PDF Output
-Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex' }
-call plug#end()
+" Plug 'xuhdev/vim-latex-live-preview', {'for': 'tex' }
+" call plug#end()
 " Vim-Plug install end ------------------
-
 
 
 
@@ -61,21 +64,16 @@ if dein#load_state('$HOME/.cache/dein')
   " Required:
   call dein#add('$HOME/.cache/dein/repos/github.com/Shougo/dein.vim')
 
+  call dein#load_toml('~/.vim/dein.toml', {'lazy': 0})
+
   " Add or remove your plugins here:
-  call dein#add('Shougo/neocomplete.vim')
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
+  " call dein#add('Shougo/neocomplete.vim')
+  " call dein#add('Shougo/neosnippet.vim')
+  " call dein#add('Shougo/neosnippet-snippets')
   " call dein#add('vim-latex/vim-latex')
 
   " You can specify revision/branch/tag.
   call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
-
-
-  " user-like plugin
-  call dein#add('mattn/vim-maketable')
-  call dein#add('junegunn/fzf')
-  call dein#add('junegunn/fzf.vim')
-
 
 
   " Required:
@@ -89,11 +87,12 @@ call dein#begin($HOME . '/.cache/dein')
 " Let dein manage dein
 " Required:
 call dein#add($HOME . '/.cache/dein/repos/github.com/Shougo/dein.vim')
+" call dein#add('tyrannicaltoucan/vim-deep-space')
 
-if !has('nvim')
-  call dein#add('roxma/nvim-yarp')
-  call dein#add('roxma/vim-hug-neovim-rpc')
-endif
+" if !has('nvim')
+"   call dein#add('roxma/nvim-yarp')
+"   call dein#add('roxma/vim-hug-neovim-rpc')
+" endif
 
 " Add or remove your plugins here like this:
 "call dein#add('Shougo/neosnippet.vim')
@@ -101,24 +100,24 @@ endif
 
 " Asynchronous Lint Engine (ALE)
 " https://rcmdnk.com/blog/2017/09/25/computer-vim/
-if has('job') && has('channel') && has('timers')
-    call dein#add('dense-analysis/ale')
-else
-    call dein#add('vim-syntastic/syntastic')
-endif
+" if has('job') && has('channel') && has('timers')
+"     call dein#add('dense-analysis/ale')
+" else
+"     call dein#add('vim-syntastic/syntastic')
+" endif
 
 
 " deoplete
 " https://rcmdnk.com/blog/2017/11/16/computer-vim/
-if ((has('nvim')  || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
-  call dein#add('Shougo/deoplete.nvim')
-  if !has('nvim')
-    call dein#add('roxma/nvim-yarp')
-    call dein#add('roxma/vim-hug-neovim-rpc')
-  endif
-elseif has('lua')
-  call dein#add('Shougo/neocomplete.vim')
-endif
+" if ((has('nvim')  || has('timers')) && has('python3')) && system('pip3 show neovim') !=# ''
+"   call dein#add('Shougo/deoplete.nvim')
+"   if !has('nvim')
+"     call dein#add('roxma/nvim-yarp')
+"     call dein#add('roxma/vim-hug-neovim-rpc')
+"   endif
+" elseif has('lua')
+"   call dein#add('Shougo/neocomplete.vim')
+" endif
 
 
 
@@ -130,27 +129,12 @@ filetype plugin indent on
 syntax enable
 
 
-
-
-" deoplete again
-" https://rcmdnk.com/blog/2017/11/16/computer-vim/
-if dein#tap('deoplete.nvim')
-  let g:deoplete#enable_at_startup = 1
-elseif dein#tap('neocomplete.vim')
-  let g:neocomplete#enable_at_startup = 1
-endif
-
-
-
-
 " If you want to install not installed plugins on startup.
 if dein#check_install()
 	call dein#install()
 endif
 
 "End dein Scripts-------------------------
-
-
 
 
 
@@ -178,8 +162,6 @@ endif
 let g:neosnippet#snippets_directory='~/.vim/bundle/neosnippet-snippets/snippets/,~/.vim/snippets'
 
 " Snippet end --------------------------------------
-
-
 
 
 
@@ -221,9 +203,9 @@ endif
 " }}}
 
 " plugin installation check {{{
-" if dein#check_install()
-"   call dein#install()
-" endif
+if dein#check_install()
+  call dein#install()
+endif
 " }}}
 
 " plugin remove check {{{
@@ -240,11 +222,11 @@ endif
 
 " to install using Vundle
 " add this line to your .vimrc file
-Plugin 'mattn/emmet-vim'
+" Plugin 'mattn/emmet-vim'
 
 " to install using Vim-Plug
 " add this line to your .vimrc file
-Plug 'mattn/emmet-vim'
+" Plug 'mattn/emmet-vim'
 
 
 " neocomplete ----------------------------------------------------------------------------------------
@@ -286,8 +268,8 @@ endfunction
 " <TAB>: completion.
 inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+" inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 " Close popup by <Space>.
 "inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
 
@@ -337,6 +319,19 @@ let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 " ----------------------------------------------------------------------------------------
 
 
+" tmux
+" https://gist.github.com/andersevenrud/015e61af2fd264371032763d4ed965b6
+" You might have to force true color when using regular vim inside tmux as the
+" colorscheme can appear to be grayscale with "termguicolors" option enabled.
+if !has('gui_running') && &term =~ '^\%(screen\|tmux\)'
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+syntax on
+set termguicolors
+colorscheme deep-space
+
+
 
 " setting ALE option ----------------------------------------
 " https://qiita.com/kaityo256/items/cb76c3f73753fe921e7b
@@ -352,10 +347,11 @@ set wildmenu
 
 " カラースキーム
 " https://github.com/tyrannicaltoucan/vim-deep-space
+"
 set background=dark
 set termguicolors
-colorscheme deep-space
 " colorscheme darkblue
+colorscheme deep-space
 
 set showmatch matchtime=1
 
@@ -372,6 +368,7 @@ if has('mouse')
 		set ttymouse=sgr
 	else
 		set ttymouse=xterm2
+
 	endif
 endif
 
