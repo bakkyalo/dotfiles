@@ -47,7 +47,6 @@ call dein#end()
 " Vim-Plug install end ------------------
 
 
-
 "dein Scripts-----------------------------
 if &compatible
   set nocompatible               " Be iMproved
@@ -218,15 +217,6 @@ endif
 
 " Gorilla end ----------------------------------------
 
-
-
-" to install using Vundle
-" add this line to your .vimrc file
-" Plugin 'mattn/emmet-vim'
-
-" to install using Vim-Plug
-" add this line to your .vimrc file
-" Plug 'mattn/emmet-vim'
 
 
 " neocomplete ----------------------------------------------------------------------------------------
